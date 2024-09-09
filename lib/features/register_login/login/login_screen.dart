@@ -1,7 +1,7 @@
-import 'package:e_commarce/features/register_login/register_screen.dart';
+import 'package:e_commarce/features/register_login/register/register_screen.dart';
 import 'package:flutter/material.dart';
-import '../../core/color_resource/color_resources.dart';
-import '../../core/text_form/coustom_text_form.dart';
+import '../../../core/color_resource/color_resources.dart';
+import '../../../core/text_form/coustom_text_form.dart';
 
 
 class LoginScreen extends StatefulWidget {
