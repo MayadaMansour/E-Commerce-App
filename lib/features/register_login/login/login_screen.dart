@@ -38,13 +38,18 @@ class LoginScreen extends StatelessWidget {
             Navigator.pop(context);
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
+                backgroundColor: Colors.red,
                   content:
-                      Text('Registration failed: ${state.failure.errorMsg}')),
+                      Text('Login failed: ${state.failure.errorMsg}',style: TextStyle(color: Colors.white),)),
             );
           } else if (state is SucessLoginStates) {
             Navigator.pop(context);
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('Login Sucess')),
+
+              const SnackBar(
+                  backgroundColor: Colors.green,
+
+                  content: Text('Login Sucess',style: TextStyle(color: Colors.white),)),
             );
           }
         },
@@ -143,7 +148,9 @@ class LoginScreen extends StatelessWidget {
                   ),
                   defaultButton(
                     onTap: () {
-                      viewModel.login();
+                      if (formKey.currentState!.validate()) {
+                        viewModel.login();
+                      }
                     },
                     text: 'LogIn',
                     bgColor: ColorResources.white,

@@ -51,7 +51,7 @@ class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
       // if (connectivityResult == ConnectivityResult.none) {
       //   return Left(NetWorkFailure(errorMsg: "No Internet Connection"));
       // }
-      var response = await apiManager.postData(Constants.register, body: {
+      var response = await apiManager.postData(Constants.signIn, body: {
         "email": email,
         "password": password,
       });
