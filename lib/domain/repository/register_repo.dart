@@ -5,4 +5,6 @@ import 'package:e_commarce/domain/entities/RegisterResponseEntity.dart';
 abstract class AuthRepository {
   Future<Either<Failure, RegisterResponseEntity>> register(String name,
       String email, String phone, String password, String rePassword);
+  Future<Either<Failure, RegisterResponseEntity>> login(
+      String email,  String password);
 }

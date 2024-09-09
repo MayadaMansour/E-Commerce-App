@@ -4,6 +4,7 @@ import 'package:e_commarce/data/model/failures.dart';
 import 'package:e_commarce/domain/entities/RegisterResponseEntity.dart';
 import 'package:e_commarce/domain/repository/register_repo.dart';
 import 'package:injectable/injectable.dart';
+
 @Injectable(as: AuthRepository)
 class AuthRepositoryImpl extends AuthRepository {
   AuthRemoteDataSource authRemoteDataSource;
@@ -15,6 +16,13 @@ class AuthRepositoryImpl extends AuthRepository {
       String email, String phone, String password, String rePassword) async {
     var either = await authRemoteDataSource.register(
         name, email, phone, password, rePassword);
+    return either.fold((error) => Left(error), (response) => Right(response));
+  }
+
+  @override
+  Future<Either<Failure, RegisterResponseEntity>> login(
+      String email, String password) async {
+    var either = await authRemoteDataSource.login(email, password);
     return either.fold((error) => Left(error), (response) => Right(response));
   }
 }

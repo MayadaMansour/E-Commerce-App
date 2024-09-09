@@ -15,8 +15,8 @@ class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
   AuthRemoteDataSourceImpl({required this.apiManager});
 
   @override
-  Future<Either<Failure, RegisterResponseEntity>> register(
-      String name, String email, String phone, String password, String rePassword) async {
+  Future<Either<Failure, RegisterResponseEntity>> register(String name,
+      String email, String phone, String password, String rePassword) async {
     try {
       // List<ConnectivityResult> connectivityResult = await Connectivity().checkConnectivity();
       // if (connectivityResult == ConnectivityResult.none) {
@@ -36,6 +36,32 @@ class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
       } else {
         print(registerResponse.message);
         return Left(ServerFailure(errorMsg: registerResponse.message!));
+      }
+    } catch (e) {
+      print(e.toString());
+      return Left(Failure(errorMsg: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, RegisterResponseEntity>> login(
+      String email, String password) async {
+    try {
+      // List<ConnectivityResult> connectivityResult = await Connectivity().checkConnectivity();
+      // if (connectivityResult == ConnectivityResult.none) {
+      //   return Left(NetWorkFailure(errorMsg: "No Internet Connection"));
+      // }
+      var response = await apiManager.postData(Constants.register, body: {
+        "email": email,
+        "password": password,
+      });
+
+      var loginResponse = RegisterResponseDto.fromJson(response.data);
+      if (response.statusCode! >= 200 && response.statusCode! < 300) {
+        return Right(loginResponse);
+      } else {
+        print(loginResponse.message);
+        return Left(ServerFailure(errorMsg: loginResponse.message!));
       }
     } catch (e) {
       print(e.toString());

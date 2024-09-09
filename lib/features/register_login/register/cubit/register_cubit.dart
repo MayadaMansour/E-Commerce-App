@@ -21,7 +21,7 @@ class RegisterViewModel extends Cubit<RegisterStates> {
 
   void register() async {
     emit(LoadingRegisterState());
-    var either = await registerUseCase.invoke(
+    var either = await registerUseCase.invokeRegister(
         nameController.text,
         emailController.text,
         phoneController.text,
